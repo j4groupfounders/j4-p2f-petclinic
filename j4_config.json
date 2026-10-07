@@ -1,0 +1,18 @@
+{
+  "name": "petclinic",
+  "stack": "Spring Boot",
+  "upstream": "spring-projects/spring-petclinic",
+  "old": "2.7.3",
+  "new": "3.5.0",
+  "reason": "Boot 2 to 3 requires Java 17, Spring 6, javax to jakarta migration and Hibernate 6; real controller/repository tests and seeded H2 app retained.",
+  "routes": [
+    "/",
+    "/owners/find",
+    "/owners?lastName=",
+    "/owners/1",
+    "/vets.html"
+  ],
+  "id": "p2-18-petclinic",
+  "repo": "j4groupfounders/j4-p2f-petclinic",
+  "source": "276880edef4c3d1029865d19d6d28e982b9d4d01"
+}

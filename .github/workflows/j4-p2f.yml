@@ -1,0 +1,44 @@
+name: J4 P2 Batch 6
+on:
+  push:
+    branches: ['j4/p2f-*']
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        mutation: ${{ contains(github.ref, 'seeds') && fromJSON('[0,1,2,3,4]') || fromJSON('[-1]') }}
+    env:
+      NODE_ENV: test
+      MONGODB_URL: mongodb://127.0.0.1/noobjs_test
+      APP_ENV: testing
+      APP_DEBUG: 'false'
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/j4.sqlite
+      CACHE_DRIVER: array
+      SESSION_DRIVER: array
+      MAIL_MAILER: array
+      TZ: UTC
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify fresh checkout
+        env:
+          J4_MUTATION: ${{ matrix.mutation }}
+        run: python3 j4_verify.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ matrix.mutation }}
+          path: Evidence/
+          retention-days: 30
