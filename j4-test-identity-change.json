@@ -1,0 +1,7 @@
+{
+  "before": "org.springframework.samples.petclinic.system.CrashControllerTests::org.springframework.samples.petclinic.system.CrashControllerTests",
+  "after": "org.springframework.samples.petclinic.system.CrashControllerTests::testTriggerException",
+  "source": "src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java",
+  "sha256": "0fd0457f417609edb9906c50898ee8384ee7fdb74399364f756380cec41b2afc",
+  "reason": "Surefire 3.5.3 reports the sole method of this unchanged class-level @Disabled test; baseline reported the class name. One skip before and after; all other identities stay exact."
+}

@@ -17,7 +17,14 @@ def inventory():
  for f in files:
   root=ET.parse(f).getroot()
   for t in root.iter('testcase'):
-   ident=t.get('classname',t.get('class',''))+'::'+t.get('name','');ids.append(ident)
+   ident=t.get('classname',t.get('class',''))+'::'+t.get('name','')
+   if n=='petclinic' and (P/'j4-test-identity-change.json').exists():
+    mapping=json.loads((P/'j4-test-identity-change.json').read_text())
+    assert hashlib.sha256((P/mapping['source']).read_bytes()).hexdigest()==mapping['sha256'],'Disabled test source changed'
+    if ident==mapping['after']:
+     assert t.find('skipped') is not None,'Previously disabled case changed state'
+     ident=mapping['before']
+   ids.append(ident)
    if t.find('skipped') is not None:skips.append(ident)
    if t.find('failure') is not None or t.find('error') is not None:fails.append(ident)
  assert ids,'No project tests executed'
