@@ -1,0 +1,32 @@
+[
+  {
+    "name": "missing pet name accepted",
+    "file": "src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java",
+    "old": "if (!StringUtils.hasLength(name)) {",
+    "new": "if (false) {"
+  },
+  {
+    "name": "missing pet type accepted",
+    "file": "src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java",
+    "old": "if (pet.isNew() && pet.getType() == null) {",
+    "new": "if (false) {"
+  },
+  {
+    "name": "missing birth date accepted",
+    "file": "src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java",
+    "old": "if (pet.getBirthDate() == null) {",
+    "new": "if (false) {"
+  },
+  {
+    "name": "owner first name corrupted",
+    "file": "src/main/java/org/springframework/samples/petclinic/model/Person.java",
+    "old": "return this.firstName;",
+    "new": "return \"J4_CORRUPTED\";"
+  },
+  {
+    "name": "owner last name corrupted",
+    "file": "src/main/java/org/springframework/samples/petclinic/model/Person.java",
+    "old": "return this.lastName;",
+    "new": "return \"J4_CORRUPTED\";"
+  }
+]
