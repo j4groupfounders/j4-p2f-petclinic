@@ -32,6 +32,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Preserve resolved lock
+        run: |
+          mkdir -p Evidence
+          if test -f composer.lock; then cp composer.lock Evidence/; fi
+          if test -f package-lock.json; then cp package-lock.json Evidence/; fi
       - name: Verify fresh checkout
         env:
           J4_MUTATION: ${{ matrix.mutation }}
