@@ -41,7 +41,8 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 * Retrieve all {@link PetType}s from the data store.
 	 * @return a Collection of {@link PetType}s.
 	 */
-	@Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
+	// Keep entity hydration: Spring Data 3.5 rewrites this cross-domain JPQL as a DTO.
+	@Query(value = "SELECT id, name FROM types ORDER BY name", nativeQuery = true)
 	@Transactional(readOnly = true)
 	List<PetType> findPetTypes();
 
